@@ -26,9 +26,15 @@ const ll MOD = 1e9 + 7;
 mt19937_64 rd(chrono::steady_clock::now().time_since_epoch().count());
 ll rand(ll l, ll r) { return uniform_int_distribution<ll>(l, r)(rd); }
 
-const ll N = 1e6 + 5;
-ll n, k, a[N];
+struct box{
+    ll vol;
+    ll pri;
+};
 
+ll n, k;
+deque<box> que;
+ll a, cost;
+    
 signed main()
 {
     ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
@@ -36,12 +42,27 @@ signed main()
     //freopen(file".OUT","w",stdout);
 
     cin >> n >> k;
-    FOR(i,1,n) cin >> a[i];
-    FOR(i,1,n){
-    	FOR(j,i + 1, i + k){
-    		if ()
-    	}
+    cin >> a;
+    que.pb({k, a});
+    for(ll i = 2; i <= n; i++){
+        cin >> a;
+
+        cost += que.front().pri;
+        que.front().vol--;
+
+        if(que.front().vol <= 0) que.pop_front();
+
+        ll t = 1;
+        while(!que.empty() && que.back().pri > a){
+
+            t += que.back().vol;
+            que.pop_back();
+            que.pb({t, a});
+        }
+        cout << cost << endl;
+        if(que.empty())que.push_back({(n - i) % k, a});
     }
+    cout << cost;
     
     return 0;
 }
