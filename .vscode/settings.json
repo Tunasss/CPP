@@ -1,0 +1,10 @@
+{
+    "cmake.configureOnOpen": true,
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "vector": "cpp",
+        "iostream": "cpp"
+    },
+    "ponicode.testSettings.testLocation.locationType": "Same folder as source file",
+    "ponicode.testSettings.testLocation.path": "{rootDir}/{filePath}/{fileName}.test.{ext}"
+}
