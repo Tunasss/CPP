@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 #include <unordered_map>
 using namespace std;
-typedef long long ll;
-typedef unsigned long long ull;
+// typedef long long ll;
+typedef unsigned long long ll;
 typedef string str;
 typedef pair <int,int> ii;
 #define file "TEST"
@@ -26,16 +26,21 @@ const ll MOD = 1e9 + 7;
 mt19937_64 rd(chrono::steady_clock::now().time_since_epoch().count());
 ll rand(ll l, ll r) { return uniform_int_distribution<ll>(l, r)(rd); }
 
-ll power(ll a, ll b){
-    ll ans = 1 % MOD;
-    for (; b; b >>= 1)
-    {
-        if (b & 1)
-            ans = ans * a % MOD;
-        a = a * a % MOD;
-    }
-    return ans;
+ll a, b, k;
+
+ll power(ll x, ll y){   
+    if (y == 0) return 0;
+    ll tmp = power(x, y / 2);
+    if (y & 1) return tmp + tmp + x % b;
+    return tmp + tmp % b
 }
+
+ll pow10(ll n){
+    if (n == 0) return 1 % b;
+    ll tmp = power10(n / 2);
+    if (y & 1) return power(tmp, n) * 10 % k;
+    return power(tmp, tmp);
+}   
 
 signed main()
 {
@@ -46,10 +51,9 @@ signed main()
     ll t;
     cin >> t;
     while(t--){
-    	ll a, b, k;
     	cin >> a >> b >> k;
-    	cout << a * power(b, k - 1);
-    
+    	cout << a * power(10, k - 1) % b * 10 / b;
+        el;
     }
     
     return 0;
