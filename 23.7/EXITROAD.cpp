@@ -35,7 +35,7 @@ typedef pair <int,int> ii;
 //III. Định nghĩa các MAX của kiểu dữ liệu
 const ll SIZE = 1e5 + 5;
 const ll MOD = 1e9 + 7;
-
+-00
 //IV. Định nghĩa hàm Debug
 #define dbg(...) cerr << "[" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "]  "
 #define dbge(...) cerr << "[" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "]" << endl;
