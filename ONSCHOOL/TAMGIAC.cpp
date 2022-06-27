@@ -14,7 +14,8 @@ bool check(int a, int b, int c){
 	return (a + b > c);
 }
 
-bool nhon(int a, int b, int c){
+bool ;
+nhon(int a, int b, int c){
 	return (a * a + b * b > c * c);
 }
 
