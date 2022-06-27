@@ -51,7 +51,7 @@ ll C(int m, int n)
 
 void init(){
     fc[0] = inv[0] = 1; 
-    for (ll i = 1; i <= 200000; i++){
+    for (ll i = 1; i < N; i++){
         fc[i] = fc[i - 1] * i % MOD;
         inv[i] = power(fc[i], MOD - 2);
     }
