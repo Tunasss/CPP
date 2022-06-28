@@ -26,12 +26,38 @@ const ll MOD = 1e9 + 7;
 mt19937_64 rd(chrono::steady_clock::now().time_since_epoch().count());
 ll rand(ll l, ll r) { return uniform_int_distribution<ll>(l, r)(rd); }
 
+const ll N = 3 * 1e5 + 5;
+ll n, k, a[N], f[N], d[N];
+ll res = 0;
+
 signed main()
 {
     ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     //freopen(file".INP","r",stdin);
     //freopen(file".OUT","w",stdout);
 
-    
+    ll n, k;
+    cin >> n >> k;
+    FOR(i,1,n) cin >> a[i];
+    d[1] = 1;
+    f[1] = 1;
+    ll minn = a[1], maxx = a[1];
+    FOR(i,2,n){
+        if (abs(a[i] - minn) <= k && abs(a[i] - minn) <= k){
+            d[i] = d[i - 1] + 1;
+            minn = min(a[i], minn);
+            maxx = max(a[i], maxx);
+        }
+        else {
+            d[i] = 1;
+            minn = min(a[i], minn);
+            maxx = max(a[i], maxx);
+        }
+        f[i] = max(f[i - 1], d[i]);
+    }
+    FOR(i,1,n){
+        res = max(res, d[i] + f[i - d[i]]);
+    }
+    cout << res;
     return 0;
 }
