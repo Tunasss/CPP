@@ -54,7 +54,6 @@ signed main()
     		if (d2[i - 1] & 1) d2[i] = d2[i - 1] + a[i];
     		d1[i] = max(a[i], d1[i - 1] + a[i]);
     	}
-    	// dbg(d1[i]), dbge(d2[i]);
     	res = max(res, d1[i]);
     }
     cout << res;
