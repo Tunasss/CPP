@@ -26,10 +26,9 @@ const ll MOD = 1e9 + 7;
 mt19937_64 rd(chrono::steady_clock::now().time_since_epoch().count());
 ll rand(ll l, ll r) { return uniform_int_distribution<ll>(l, r)(rd); }
 
-
 const ll N = 111;
  
-ll n;
+ll n, k, a[N];
 
 struct Matrix {
 
@@ -79,6 +78,29 @@ void print(Matrix X){
     cout << "-+\n";
 }
 
+ll power(ll a, ll b){
+    if (b == 0) return 1;
+    ll ans = power(a, b / 2);
+    if (b & 1) return ans * ans % MOD * a % MOD;
+    return ans * ans % MOD;
+}
+
+// ll checker(ll x){
+//     ll f[x + 5];
+//     f[0] = f[1] = 0;
+
+//     FOR(i,2,x){
+//         f[i] = (f[i - 1] % MOD + f[i - 2] % MOD) % MOD;
+//         f[i] %= MOD;
+//         FOR(j,0,n){
+//             f[i] += a[j] * power(i,j);
+//             f[i] %= MOD;
+//         }
+//     }
+
+//     return f[x];
+// }
+
 signed main()
 {
     ios_base::sync_with_stdio(0);cin.tie(0);
@@ -86,17 +108,46 @@ signed main()
     //freopen(file".OUT","w",stdout);
     
     Matrix base, D;
+    cin >> n >> k;
+    if (k <= 1){
+        cout << 0;
+        el;
+        return 0;
+    }
+    FOR(i,0,n) cin >> a[i];
 
-    D.rowSize = ;
-    D.columnSize = ;
+    D.rowSize = n + 3;
+    D.columnSize = n + 3;
 
+    D.m[1][1] = 1;
+
+    FOR(i,2,n + 1){
+        FOR(j,1,n + 1){
+            D.m[i][j] = D.m[i - 1][j - 1] + D.m[i - 1][j];
+            D.m[i][j] %= MOD;
+        }
+    }
+
+    FOR(i,0,n){
+        D.m[n + 2][i + 1] = a[i];
+    }
+
+    D.m[n + 3][n + 2] = D.m[n + 2][n + 2] = D.m[n + 2][n + 3] = 1;
     // print(D);
 
-    base.rowSize = ;
-    base.columnSize = ;
+    base.rowSize = n + 3;
+    base.columnSize = 1;
 
-    // print(base);
-    
+    FOR(i,0,n){
+        base.m[i + 1][1] = power(2, i);
+    }
+
+    Matrix ans = Pow(D,k - 1) * base;
+
+    ll res = ans.m[n + 2][1];
+
+    cout << res % MOD;
+    el;
+
     return 0;
 }
-
